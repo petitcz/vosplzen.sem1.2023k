@@ -14,7 +14,7 @@
 
 @if (Model.ClassBy.Length > 0)
 {
-    <label class="m-3">|</label> <a asp-page="./Students" asp-route-classby="" asp-route-orderby="class">zrušit filtr</a>
+    <label class="m-3">|</label> <a asp-page="./Students" asp-route-classby="" asp-route-orderby="@Model.Orderby">zrušit filtr</a>
 }
 
 <hr />
