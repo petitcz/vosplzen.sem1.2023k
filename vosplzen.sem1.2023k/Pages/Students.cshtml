@@ -6,6 +6,13 @@
 <h1>Seznam studentů</h1>
 <hr />
 
+<label>řadit dle: </label>
+<a asp-page="./Students" asp-route-orderby="lastname">příjmení</a>
+<a asp-page="./Students" asp-route-orderby="name">jméno</a>
+<a asp-page="./Students" asp-route-orderby="email">e-mail</a>
+<a asp-page="./Students" asp-route-orderby="class">třída</a>
+<hr />
+
 @foreach (var item in Model.Students)
 {
 

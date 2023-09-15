@@ -9,7 +9,7 @@ namespace vosplzen.sem1._2023k.Pages
 
         public List<Student> Students { get; set; } = new List<Student>();
 
-        public void OnGet()
+        public void OnGet(string orderby = "lastname")
         {
             Students.Add(new Student()
             {
@@ -35,7 +35,22 @@ namespace vosplzen.sem1._2023k.Pages
                 LastName = "Fictum"
             });
 
-
+            if (orderby.Equals("lastname"))
+            {
+                Students = Students.OrderBy(x => x.LastName).ToList();
+            }
+            else if (orderby.Equals("email"))
+            {
+                Students = Students.OrderBy(x => x.Email).ToList();
+            }
+            else if (orderby.Equals("name"))
+            {
+                Students = Students.OrderBy(x => x.Name).ToList();
+            }
+            else if (orderby.Equals("class"))
+            {
+                Students = Students.OrderBy(x => x.Class).ToList();
+            }
         }
     }
 }
