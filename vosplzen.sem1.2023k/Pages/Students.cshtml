@@ -3,14 +3,20 @@
 @{
 }
 
-<h1>Seznam studentů</h1>
+<h1>Seznam studentů (@Model.Students.Count)</h1>
 <hr />
 
 <label>řadit dle: </label>
-<a asp-page="./Students" asp-route-orderby="lastname">příjmení</a>
-<a asp-page="./Students" asp-route-orderby="name">jméno</a>
-<a asp-page="./Students" asp-route-orderby="email">e-mail</a>
-<a asp-page="./Students" asp-route-orderby="class">třída</a>
+<a asp-page="./Students" asp-route-classby="@Model.ClassBy" asp-route-orderby="lastname">příjmení</a>
+<a asp-page="./Students" asp-route-classby="@Model.ClassBy" asp-route-orderby="name">jméno</a>
+<a asp-page="./Students" asp-route-classby="@Model.ClassBy" asp-route-orderby="email">e-mail</a>
+<a asp-page="./Students" asp-route-classby="@Model.ClassBy" asp-route-orderby="class">třída</a>
+
+@if (Model.ClassBy.Length > 0)
+{
+    <label class="m-3">|</label> <a asp-page="./Students" asp-route-classby="" asp-route-orderby="class">zrušit filtr</a>
+}
+
 <hr />
 
 @foreach (var item in Model.Students)
@@ -26,7 +32,7 @@
                 <dt>Email:</dt>
                 <dd>@item.Email</dd>
                 <dt>Třída:</dt>
-                <dd>@item.Class</dd>
+                <dd><a asp-page="./Students" asp-route-orderby="@Model.Orderby" asp-route-classby="@item.Class"> @item.Class</a></dd>
             </dl>
 
             <hr />

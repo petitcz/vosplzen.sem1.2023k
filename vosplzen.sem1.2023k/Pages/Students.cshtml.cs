@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using vosplzen.sem1._2023k.Data;
+using vosplzen.sem1._2023k.Services;
 
 namespace vosplzen.sem1._2023k.Pages
 {
@@ -9,48 +10,16 @@ namespace vosplzen.sem1._2023k.Pages
 
         public List<Student> Students { get; set; } = new List<Student>();
 
-        public void OnGet(string orderby = "lastname")
+        public string Orderby { get; set; } = string.Empty;
+
+        public string ClassBy { get; set; } = string.Empty;
+
+        public void OnGet(string orderby = "lastname", string classby = "")
         {
-            Students.Add(new Student()
-            {
-                Class = "1A",
-                Email = "bohac@vosplzen.cz",
-                Name = "Petr",
-                LastName = "Boháè"
-            });
+            Orderby = orderby;
+            ClassBy = classby;
 
-            Students.Add(new Student()
-            {
-                Class = "1A",
-                Email = "zavadska@vosplzen.cz",
-                Name = "Marie",
-                LastName = "Zavadska"
-            });
-
-            Students.Add(new Student()
-            {
-                Class = "3A",
-                Email = "fictum@vosplzen.cz",
-                Name = "Jiøí",
-                LastName = "Fictum"
-            });
-
-            if (orderby.Equals("lastname"))
-            {
-                Students = Students.OrderBy(x => x.LastName).ToList();
-            }
-            else if (orderby.Equals("email"))
-            {
-                Students = Students.OrderBy(x => x.Email).ToList();
-            }
-            else if (orderby.Equals("name"))
-            {
-                Students = Students.OrderBy(x => x.Name).ToList();
-            }
-            else if (orderby.Equals("class"))
-            {
-                Students = Students.OrderBy(x => x.Class).ToList();
-            }
+            Students = StudentService.GetData(Orderby, ClassBy);      
         }
     }
 }
